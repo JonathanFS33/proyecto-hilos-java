@@ -5,6 +5,7 @@ package com.umg.proyecto.hilos.vista;
  * @author Jonathan
  */
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -18,31 +19,20 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
     Graphics g;
 
-//    private int img1x = 100;
-//    private int img2y = 300;
-//    private int img2x = 100;
-//    private int img3x = 700;
-//    private int img3y = 200;
     private boolean avanzar = true;
     private boolean avanzar2 = true;
-    private boolean avanzar3 = true;
+
     private int burguers = 5;
 
     ProductorConsumidor pc = new ProductorConsumidor();
     Thread consumidor1;
     Thread consumidor2;
-//    Thread producto;
     Thread productor;
 
     public Ventana() {
         initComponents();
         //obtener gráficos del panel
         g = panelAlgoritmo.getGraphics();
-        //setear el objeto gráfico
-        //img1.setLocation(100, 100);
-        //img2.setLocation(100, 300);
-        //imgProducer.setLocation(700, 200);
-        //panelAlgoritmo.paintComponents(g);
         verde1.setVisible(false);
         verde2.setVisible(false);
         rojo1.setVisible(true);
@@ -66,10 +56,12 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         private int localImg2y;
         private int localImg3x;
         private int localImg3y;
-        
+
         Random random = new Random();
 
         int randomIntInRange;
+
+        int randomTime;
 
         private int img2y = 300;
         private int img2x = 100;
@@ -87,7 +79,9 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                 //dibujar circulo
                 //panelAlgoritmo.repaint();
-                img1.setLocation(img1x, img1x);
+                if (localImg1x != 200) {
+                    img1.setLocation(img1x, img1x);
+                }
 
                 if (img1x == 100) {
                     avanzar = true;
@@ -102,10 +96,16 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     }
 
                 } else if (img1x == 200) {
-                    Thread.sleep(700);
+
+                    randomTime = random.nextInt(900) + 100;
+
+                    Thread.sleep(randomTime);
                     avanzar = false;
+
                     if (burguers == 5) {
                         burguer1.setVisible(false);
+                        burguer1.setPreferredSize(new Dimension(0, 0));
+                        panelAlgoritmo.revalidate();
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -120,6 +120,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     } else if (burguers == 4) {
                         burguer2.setVisible(false);
+
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -133,6 +134,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     } else if (burguers == 3) {
                         burguer3.setVisible(false);
+
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -145,6 +147,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     } else if (burguers == 2) {
                         burguer4.setVisible(false);
+
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -157,6 +160,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     } else if (burguers == 1) {
                         last = true;
                         burguer5.setVisible(false);
+
                     }
 
                 }
@@ -199,11 +203,13 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     }
 
                 } else if (img2x == 200) {
-                    Thread.sleep(500);
+                    randomTime = random.nextInt(900) + 100;
+                    Thread.sleep(randomTime);
                     avanzar2 = false;
 
                     if (burguers == 5) {
                         burguer1.setVisible(false);
+
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -218,6 +224,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     } else if (burguers == 4) {
                         burguer2.setVisible(false);
+  
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -231,6 +238,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     } else if (burguers == 3) {
                         burguer3.setVisible(false);
+
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -243,6 +251,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     } else if (burguers == 2) {
                         burguer4.setVisible(false);
+
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -255,6 +264,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     } else if (burguers == 1) {
                         last = true;
                         burguer5.setVisible(false);
+
                     }
                 }
 
@@ -304,15 +314,22 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     }
                 } else if (img3x == 500) {
                     avanzar = true;
+
+                    randomTime = random.nextInt(400) + 100;
+
                     imgProducer.setLocation(localImg3x, img3y);
-                    Thread.sleep(300);
+
+                    Thread.sleep(randomTime);
                     burguer5.setVisible(true);
+
                     burguer5.setLocation(burguerx + 280, burguery);
                     imgProducer.setLocation(localImg3x, img3y);
-                    
+
                     imgProducer.setLocation(localImg3x, img3y);
-                    Thread.sleep(300);
+
+                    Thread.sleep(randomTime);
                     burguer4.setVisible(true);
+
                     imgProducer.setLocation(localImg3x, img3y);
                     for (int i = 0; i <= 70; i++) {
                         imgProducer.setLocation(localImg3x, img3y);
@@ -320,31 +337,38 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                         Thread.sleep(10);
                         imgProducer.setLocation(localImg3x, img3y);
                     }
-                    
+
                     imgProducer.setLocation(localImg3x, img3y);
-                    Thread.sleep(300);
+
+                    Thread.sleep(randomTime);
                     imgProducer.setLocation(localImg3x, img3y);
+
                     burguer3.setVisible(true);
+
                     for (int i = 0; i <= 70; i++) {
                         imgProducer.setLocation(localImg3x, img3y);
                         burguer3.setLocation(burguerx + 280 - (i * 2), burguery);
                         Thread.sleep(10);
                     }
-                    
+
                     imgProducer.setLocation(localImg3x, img3y);
-                    Thread.sleep(300);
+
+                    Thread.sleep(randomTime);
                     imgProducer.setLocation(localImg3x, img3y);
                     burguer2.setVisible(true);
+
                     for (int i = 0; i <= 70; i++) {
                         imgProducer.setLocation(localImg3x, img3y);
                         burguer2.setLocation(burguerx + 280 - (i * 3), burguery);
                         Thread.sleep(10);
                     }
-                    
+
                     imgProducer.setLocation(localImg3x, img3y);
-                    Thread.sleep(300);
+
+                    Thread.sleep(randomTime);
                     imgProducer.setLocation(localImg3x, img3y);
                     burguer1.setVisible(true);
+
                     for (int i = 0; i <= 70; i++) {
                         imgProducer.setLocation(localImg3x, img3y);
                         burguer1.setLocation(burguerx + 280 - (i * 4), burguery);
@@ -390,6 +414,11 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         rojo1 = new javax.swing.JPanel();
         rojo2 = new javax.swing.JPanel();
         verde2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
 
@@ -401,31 +430,45 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
         panelAlgoritmo.setBackground(new java.awt.Color(204, 255, 255));
         panelAlgoritmo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        panelAlgoritmo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelAlgoritmo.setLayout(null);
 
         img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
-        panelAlgoritmo.add(img1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
+        panelAlgoritmo.add(img1);
+        img1.setBounds(100, 100, 32, 32);
 
         img2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
-        panelAlgoritmo.add(img2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
+        panelAlgoritmo.add(img2);
+        img2.setBounds(100, 300, 32, 32);
 
         burguer1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
-        panelAlgoritmo.add(burguer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
+        burguer1.setMinimumSize(new java.awt.Dimension(0, 0));
+        burguer1.setPreferredSize(null);
+        panelAlgoritmo.add(burguer1);
+        burguer1.setBounds(220, 200, 32, 32);
 
         burguer2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
-        panelAlgoritmo.add(burguer2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 200, -1, -1));
+        burguer2.setPreferredSize(null);
+        panelAlgoritmo.add(burguer2);
+        burguer2.setBounds(290, 200, 32, 32);
 
         burguer3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
-        panelAlgoritmo.add(burguer3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 200, -1, -1));
+        burguer3.setPreferredSize(null);
+        panelAlgoritmo.add(burguer3);
+        burguer3.setBounds(360, 200, 32, 32);
 
         burguer4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
-        panelAlgoritmo.add(burguer4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 200, -1, -1));
+        burguer4.setPreferredSize(null);
+        panelAlgoritmo.add(burguer4);
+        burguer4.setBounds(430, 200, 32, 32);
 
         burguer5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
-        panelAlgoritmo.add(burguer5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
+        burguer5.setPreferredSize(null);
+        panelAlgoritmo.add(burguer5);
+        burguer5.setBounds(500, 200, 32, 32);
 
         imgProducer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chef (1).png"))); // NOI18N
-        panelAlgoritmo.add(imgProducer, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, -1, -1));
+        panelAlgoritmo.add(imgProducer);
+        imgProducer.setBounds(700, 200, 64, 64);
 
         verde1.setBackground(new java.awt.Color(0, 255, 0));
 
@@ -440,7 +483,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        panelAlgoritmo.add(verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 40, 40));
+        panelAlgoritmo.add(verde1);
+        verde1.setBounds(640, 30, 40, 40);
 
         rojo1.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -455,7 +499,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        panelAlgoritmo.add(rojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 40, 40));
+        panelAlgoritmo.add(rojo1);
+        rojo1.setBounds(680, 30, 40, 40);
 
         rojo2.setBackground(new java.awt.Color(255, 0, 0));
 
@@ -470,7 +515,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        panelAlgoritmo.add(rojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 40, 40));
+        panelAlgoritmo.add(rojo2);
+        rojo2.setBounds(140, 30, 40, 40);
 
         verde2.setBackground(new java.awt.Color(0, 255, 0));
 
@@ -485,7 +531,28 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        panelAlgoritmo.add(verde2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 40, 40));
+        panelAlgoritmo.add(verde2);
+        verde2.setBounds(180, 30, 40, 40);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plate.png"))); // NOI18N
+        panelAlgoritmo.add(jLabel1);
+        jLabel1.setBounds(485, 230, 70, 20);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plate.png"))); // NOI18N
+        panelAlgoritmo.add(jLabel2);
+        jLabel2.setBounds(205, 230, 70, 20);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plate.png"))); // NOI18N
+        panelAlgoritmo.add(jLabel3);
+        jLabel3.setBounds(275, 230, 70, 20);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plate.png"))); // NOI18N
+        panelAlgoritmo.add(jLabel4);
+        jLabel4.setBounds(345, 230, 70, 20);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plate.png"))); // NOI18N
+        panelAlgoritmo.add(jLabel5);
+        jLabel5.setBounds(415, 230, 70, 20);
 
         jPanel1.add(panelAlgoritmo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 900, 400));
 
@@ -556,6 +623,11 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel img1;
     private javax.swing.JLabel img2;
     private javax.swing.JLabel imgProducer;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelAlgoritmo;
     private javax.swing.JPanel rojo1;
@@ -598,23 +670,22 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
-            
+
             verde2.setVisible(true);
             rojo2.setVisible(false);
-            
+
             //iniciar el hilo
             consumidor1.start();
             consumidor2.start();
-            //producto.start();
             productor.start();
         }
         if (e.getSource() == btnStop) {
-            
+
             verde1.setVisible(false);
             verde2.setVisible(false);
             rojo1.setVisible(true);
             rojo2.setVisible(true);
-            
+
             //detener hilo de animacion y limpiar el panel
             consumidor1.interrupt();
             consumidor2.interrupt();
@@ -632,6 +703,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             burguer3.setVisible(true);
             burguer4.setVisible(true);
             burguer5.setVisible(true);
+
             burguers = 5;
         }
     }
