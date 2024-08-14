@@ -4,7 +4,6 @@ package com.umg.proyecto.hilos.vista;
  *
  * @author Jonathan
  */
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -16,290 +15,361 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 public class Ventana extends javax.swing.JFrame implements ActionListener {
-    
+
     Graphics g;
-    
-    private int img1x = 100;
-    private int img2y = 300;
-    private int img2x = 100;
-    private int img3x = 700;
-    private int img3y = 200;
+
+//    private int img1x = 100;
+//    private int img2y = 300;
+//    private int img2x = 100;
+//    private int img3x = 700;
+//    private int img3y = 200;
     private boolean avanzar = true;
     private boolean avanzar2 = true;
     private boolean avanzar3 = true;
     private int burguers = 5;
-    
+
     ProductorConsumidor pc = new ProductorConsumidor();
     Thread consumidor1;
     Thread consumidor2;
 //    Thread producto;
     Thread productor;
-    
+
     public Ventana() {
         initComponents();
         //obtener gráficos del panel
         g = panelAlgoritmo.getGraphics();
         //setear el objeto gráfico
-        img1.setLocation(100, 100);
-        img2.setLocation(100, 300);
-        imgProducer.setLocation(700, 200);
-        panelAlgoritmo.paintComponents(g);
+        //img1.setLocation(100, 100);
+        //img2.setLocation(100, 300);
+        //imgProducer.setLocation(700, 200);
+        //panelAlgoritmo.paintComponents(g);
+        verde1.setVisible(false);
+        verde2.setVisible(false);
+        rojo1.setVisible(true);
+        rojo2.setVisible(true);
         btnStart.addActionListener(this);
         btnStop.addActionListener(this);
     }
-    
+
     class ProductorConsumidor {
+
         private int bandera = 0;
         private boolean first = true;
-        
+
         private int burguerx = 220;
         private int burguery = 200;
         private int counter = 0;
         private int countBurguerPosition = 280;
-        Random random = new Random();
+        private int img1x = 100;
+        private int localImg1x;
+        private int localImg2x;
+        private int localImg2y;
+        private int localImg3x;
+        private int localImg3y;
         
+        Random random = new Random();
+
         int randomIntInRange;
 
-        
+        private int img2y = 300;
+        private int img2x = 100;
+        private int img3x = 700;
+        private int img3y = 200;
+
+        private boolean last = false;
+
         public synchronized void run() throws InterruptedException {
-            while(true){
-                
-                
-                while(randomIntInRange == 1 || burguers == 0){
-                        wait();
-                    }
-                
-                //dibujar circulo
-                panelAlgoritmo.repaint();
-                img1.setLocation(img1x, img1x);
-                
-                if (img1x == 100) {
-                    avanzar = true;
-                                  
-                    randomIntInRange = random.nextInt(2);   
+            while (true) {
 
-                    System.out.println(burguers);
-                    
-                }
-                
-                else if(img1x == 200){
-                    avanzar = false;
-                    if(burguers == 5){
-                        burguer1.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 4){
-                        burguer2.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 3){
-                        burguer3.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 2){
-                        burguer4.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 1){
-                        burguer5.setVisible(false);
-                        burguers--;
-                    }
-                    
-                } 
-                
-                
-
-                if(avanzar){
-                    img1x += 1;
-                } else{
-                    img1x -= 1;
-                }
-               
-                notify();
-
-                Thread.sleep(10);
-            }
-        }
-        
-        public synchronized void run2() throws InterruptedException {
-            while(true){
-                
-                
-                
-                while(randomIntInRange == 0 || burguers == 0){
-                        wait();
-                    }
-
-                //dibujar circulo
-                panelAlgoritmo.repaint();
-                img2.setLocation(img2x, img2y);
-                
-                if (img2x == 100) {
-                    avanzar2 = true;
-                    
-                    randomIntInRange = random.nextInt(2);                
-                       
-                    
-                    System.out.println(burguers);
-                }
-                
-                
-                
-                else if(img2x == 200){
-                    avanzar2 = false;
-                    if(burguers == 5){
-                        burguer1.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 4){
-                        burguer2.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 3){
-                        burguer3.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 2){
-                        burguer4.setVisible(false);
-                        burguers--;
-                    }
-                    else if(burguers == 1){
-                        burguer5.setVisible(false);
-                        burguers--;
-                    }
-                }
-                
-                
-                
-                
-                
-                if(avanzar2){
-                    img2x += 1;
-                    img2y -= 1;
-                } else{
-                    img2x -= 1;
-                    img2y += 1;
-                }
-               
-                
-
-                notify();
-
-                Thread.sleep(10);
-
-
-            }
-        }
-        
-        public synchronized void productor() throws InterruptedException {
-            while(true){
-                
-                while (burguers != 0){
+                while (randomIntInRange == 1 || burguers == 0) {
                     wait();
                 }
-                
-                panelAlgoritmo.repaint();
-                imgProducer.setLocation(img3x, img3y);
-                
-                if(img3x == 700){
-                  avanzar = false;
-                  if(counter == 1){
-                     burguers = 5;
-                     counter = 0;
-                  }
-                }
-                else if(img3x == 500) {
+
+                //dibujar circulo
+                //panelAlgoritmo.repaint();
+                img1.setLocation(img1x, img1x);
+
+                if (img1x == 100) {
                     avanzar = true;
+
+                    randomIntInRange = random.nextInt(2);
+
+                    System.out.println(burguers);
+
+                    if (last == true) {
+                        last = false;
+                        burguers--;
+                    }
+
+                } else if (img1x == 200) {
+                    Thread.sleep(700);
+                    avanzar = false;
+                    if (burguers == 5) {
+                        burguer1.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer2.setLocation(290 - i, 200);
+                            burguer3.setLocation(360 - i, 200);
+                            burguer4.setLocation(430 - i, 200);
+                            burguer5.setLocation(500 - i, 200);
+
+                            img1.setLocation(localImg1x, localImg1x);
+                        }
+
+                    } else if (burguers == 4) {
+                        burguer2.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer3.setLocation(290 - i, 200);
+                            burguer4.setLocation(360 - i, 200);
+                            burguer5.setLocation(430 - i, 200);
+
+                            img1.setLocation(localImg1x, localImg1x);
+                        }
+
+                    } else if (burguers == 3) {
+                        burguer3.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer4.setLocation(290 - i, 200);
+                            burguer5.setLocation(360 - i, 200);
+
+                            img1.setLocation(localImg1x, localImg1x);
+                        }
+
+                    } else if (burguers == 2) {
+                        burguer4.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer5.setLocation(290 - i, 200);
+
+                            img1.setLocation(localImg1x, localImg1x);
+                        }
+
+                    } else if (burguers == 1) {
+                        last = true;
+                        burguer5.setVisible(false);
+                    }
+
+                }
+
+                if (avanzar) {
+                    img1x += 1;
+                    localImg1x = img1x;
+                } else {
+                    img1x -= 1;
+                    localImg1x = img1x;
+                }
+
+                notify();
+
+                Thread.sleep(10);
+            }
+        }
+
+        public synchronized void run2() throws InterruptedException {
+            while (true) {
+
+                while (randomIntInRange == 0 || burguers == 0) {
+                    wait();
+                }
+
+                //dibujar circulo
+                //panelAlgoritmo.repaint();
+                img2.setLocation(img2x, img2y);
+
+                if (img2x == 100) {
+                    avanzar2 = true;
+
+                    randomIntInRange = random.nextInt(2);
+
+                    System.out.println(burguers);
+
+                    if (last == true) {
+                        last = false;
+                        burguers--;
+                    }
+
+                } else if (img2x == 200) {
+                    Thread.sleep(500);
+                    avanzar2 = false;
+
+                    if (burguers == 5) {
+                        burguer1.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer2.setLocation(290 - i, 200);
+                            burguer3.setLocation(360 - i, 200);
+                            burguer4.setLocation(430 - i, 200);
+                            burguer5.setLocation(500 - i, 200);
+
+                            img2.setLocation(localImg2x, localImg2y);
+                        }
+
+                    } else if (burguers == 4) {
+                        burguer2.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer3.setLocation(290 - i, 200);
+                            burguer4.setLocation(360 - i, 200);
+                            burguer5.setLocation(430 - i, 200);
+
+                            img2.setLocation(localImg2x, localImg2y);
+                        }
+
+                    } else if (burguers == 3) {
+                        burguer3.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer4.setLocation(290 - i, 200);
+                            burguer5.setLocation(360 - i, 200);
+
+                            img2.setLocation(localImg2x, localImg2y);
+                        }
+
+                    } else if (burguers == 2) {
+                        burguer4.setVisible(false);
+                        burguers--;
+
+                        for (int i = 0; i <= 70; i++) {
+                            Thread.sleep(10);
+                            burguer5.setLocation(290 - i, 200);
+
+                            img2.setLocation(localImg2x, localImg2y);
+                        }
+
+                    } else if (burguers == 1) {
+                        last = true;
+                        burguer5.setVisible(false);
+                    }
+                }
+
+                if (avanzar2) {
+                    img2x += 1;
+                    img2y -= 1;
+
+                    localImg2x = img2x;
+                    localImg2y = img2y;
+                } else {
+                    img2x -= 1;
+                    img2y += 1;
+
+                    localImg2x = img2x;
+                    localImg2y = img2y;
+                }
+
+                notify();
+
+                Thread.sleep(10);
+            }
+        }
+
+        public synchronized void productor() throws InterruptedException {
+            while (true) {
+
+                while (burguers != 0) {
+                    verde1.setVisible(false);
+                    rojo1.setVisible(true);
+                    verde2.setVisible(true);
+                    rojo2.setVisible(false);
+                    wait();
+                }
+                verde1.setVisible(true);
+                rojo1.setVisible(false);
+                verde2.setVisible(false);
+                rojo2.setVisible(true);
+
+                //panelAlgoritmo.repaint();
+                imgProducer.setLocation(localImg3x, img3y);
+
+                if (img3x == 700) {
+                    avanzar = false;
+                    if (counter == 1) {
+                        burguers = 5;
+                        counter = 0;
+                    }
+                } else if (img3x == 500) {
+                    avanzar = true;
+                    imgProducer.setLocation(localImg3x, img3y);
+                    Thread.sleep(300);
                     burguer5.setVisible(true);
+                    burguer5.setLocation(burguerx + 280, burguery);
+                    imgProducer.setLocation(localImg3x, img3y);
+                    
+                    imgProducer.setLocation(localImg3x, img3y);
+                    Thread.sleep(300);
                     burguer4.setVisible(true);
-                    Thread.sleep(100);
+                    imgProducer.setLocation(localImg3x, img3y);
+                    for (int i = 0; i <= 70; i++) {
+                        imgProducer.setLocation(localImg3x, img3y);
+                        burguer4.setLocation(burguerx + 280 - (i), burguery);
+                        Thread.sleep(10);
+                        imgProducer.setLocation(localImg3x, img3y);
+                    }
+                    
+                    imgProducer.setLocation(localImg3x, img3y);
+                    Thread.sleep(300);
+                    imgProducer.setLocation(localImg3x, img3y);
                     burguer3.setVisible(true);
-                    Thread.sleep(100);
+                    for (int i = 0; i <= 70; i++) {
+                        imgProducer.setLocation(localImg3x, img3y);
+                        burguer3.setLocation(burguerx + 280 - (i * 2), burguery);
+                        Thread.sleep(10);
+                    }
+                    
+                    imgProducer.setLocation(localImg3x, img3y);
+                    Thread.sleep(300);
+                    imgProducer.setLocation(localImg3x, img3y);
                     burguer2.setVisible(true);
-                    Thread.sleep(100);
+                    for (int i = 0; i <= 70; i++) {
+                        imgProducer.setLocation(localImg3x, img3y);
+                        burguer2.setLocation(burguerx + 280 - (i * 3), burguery);
+                        Thread.sleep(10);
+                    }
+                    
+                    imgProducer.setLocation(localImg3x, img3y);
+                    Thread.sleep(300);
+                    imgProducer.setLocation(localImg3x, img3y);
                     burguer1.setVisible(true);
-                    burguer1.setLocation(burguerx, burguery);
-                    burguer2.setLocation(burguerx+70, burguery);
-                    burguer3.setLocation(burguerx+140, burguery);
-                    burguer4.setLocation(burguerx+210, burguery);
-                    burguer5.setLocation(burguerx+280, burguery);
+                    for (int i = 0; i <= 70; i++) {
+                        imgProducer.setLocation(localImg3x, img3y);
+                        burguer1.setLocation(burguerx + 280 - (i * 4), burguery);
+                        Thread.sleep(10);
+                    }
+
                     counter = 1;
 
                 }
-                
-                if(avanzar == false){
+
+                if (avanzar == false) {
                     img3x--;
-                } else{
+                    localImg3x = img3x;
+                } else {
                     img3x++;
+                    localImg3x = img3x;
                 }
-                
+
                 System.out.println(burguers);
-                
-                
+
                 notify();
                 Thread.sleep(10);
             }
         }
-        
-//        public synchronized void producto() throws InterruptedException {
-//            while(true){
-//                panelAlgoritmo.repaint();
-//                burguer1.setLocation(burguerx, burguery);
-//                burguer2.setLocation(burguerx+70, burguery);
-//                burguer3.setLocation(burguerx+140, burguery);
-//                burguer4.setLocation(burguerx+210, burguery);
-//                burguer5.setLocation(burguerx+280, burguery);
-//                
-//                if(burguer1.isVisible() == false ){
-//                    if(countBurguerPosition != 0){
-//                        burguerx--;
-//                        countBurguerPosition --;
-//                        while(countBurguerPosition == 210){
-//                            wait();
-//                        }
-//                    }
-//                }
-//                if(burguer2.isVisible() == false ){
-//                    if(countBurguerPosition != 0){
-//                        burguerx--;
-//                        countBurguerPosition --;
-//                        while(countBurguerPosition == 140){
-//                            wait();
-//                        }
-//                    }
-//                }
-//                if(burguer3.isVisible() == false ){
-//                    if(countBurguerPosition != 0){
-//                        burguerx--;
-//                        countBurguerPosition --;
-//                        while(countBurguerPosition == 70){
-//                            wait();
-//                        }
-//                    }
-//                }
-//                if(burguer4.isVisible() == false ){
-//                    if(countBurguerPosition != 0){
-//                        burguerx--;
-//                        countBurguerPosition --;
-//                        while(countBurguerPosition == 0){
-//                            wait();
-//                        }
-//                    }
-//                }
-//                if(burguer5.isVisible() == false ){
-//                    if(countBurguerPosition != 0){
-//                        burguerx--;
-//                        countBurguerPosition --;
-//                        while(countBurguerPosition == -70){
-//                            wait();
-//                        }
-//                    }
-//                }
-//                
-//                notify();
-//                Thread.sleep(10);
-//            }
-//        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -316,6 +386,10 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         burguer4 = new javax.swing.JLabel();
         burguer5 = new javax.swing.JLabel();
         imgProducer = new javax.swing.JLabel();
+        verde1 = new javax.swing.JPanel();
+        rojo1 = new javax.swing.JPanel();
+        rojo2 = new javax.swing.JPanel();
+        verde2 = new javax.swing.JPanel();
         btnStart = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
 
@@ -330,10 +404,10 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         panelAlgoritmo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
-        panelAlgoritmo.add(img1, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 105, -1, -1));
+        panelAlgoritmo.add(img1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));
 
         img2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
-        panelAlgoritmo.add(img2, new org.netbeans.lib.awtextra.AbsoluteConstraints(107, 280, -1, -1));
+        panelAlgoritmo.add(img2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, -1));
 
         burguer1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
         panelAlgoritmo.add(burguer1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, -1, -1));
@@ -350,8 +424,68 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         burguer5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
         panelAlgoritmo.add(burguer5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
 
-        imgProducer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chef.png"))); // NOI18N
+        imgProducer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chef (1).png"))); // NOI18N
         panelAlgoritmo.add(imgProducer, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 200, -1, -1));
+
+        verde1.setBackground(new java.awt.Color(0, 255, 0));
+
+        javax.swing.GroupLayout verde1Layout = new javax.swing.GroupLayout(verde1);
+        verde1.setLayout(verde1Layout);
+        verde1Layout.setHorizontalGroup(
+            verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        verde1Layout.setVerticalGroup(
+            verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        panelAlgoritmo.add(verde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 40, 40));
+
+        rojo1.setBackground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout rojo1Layout = new javax.swing.GroupLayout(rojo1);
+        rojo1.setLayout(rojo1Layout);
+        rojo1Layout.setHorizontalGroup(
+            rojo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        rojo1Layout.setVerticalGroup(
+            rojo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        panelAlgoritmo.add(rojo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 30, 40, 40));
+
+        rojo2.setBackground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout rojo2Layout = new javax.swing.GroupLayout(rojo2);
+        rojo2.setLayout(rojo2Layout);
+        rojo2Layout.setHorizontalGroup(
+            rojo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        rojo2Layout.setVerticalGroup(
+            rojo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        panelAlgoritmo.add(rojo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 40, 40));
+
+        verde2.setBackground(new java.awt.Color(0, 255, 0));
+
+        javax.swing.GroupLayout verde2Layout = new javax.swing.GroupLayout(verde2);
+        verde2.setLayout(verde2Layout);
+        verde2Layout.setHorizontalGroup(
+            verde2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        verde2Layout.setVerticalGroup(
+            verde2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        panelAlgoritmo.add(verde2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 40, 40));
 
         jPanel1.add(panelAlgoritmo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 900, 400));
 
@@ -409,7 +543,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             }
         });
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnStart;
@@ -424,43 +558,49 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel imgProducer;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelAlgoritmo;
+    private javax.swing.JPanel rojo1;
+    private javax.swing.JPanel rojo2;
+    private javax.swing.JPanel verde1;
+    private javax.swing.JPanel verde2;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnStart) {
-            
-            this.consumidor2 = new Thread( () -> {
-            try {
-                pc.run2();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            }
+
+            this.consumidor2 = new Thread(() -> {
+                try {
+                    pc.run2();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
             });
-            
-            this.consumidor1 = new Thread( () -> {
+
+            this.consumidor1 = new Thread(() -> {
                 try {
                     pc.run();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
-            
-        //        this.producto = new Thread( () -> {
-        //            try {
-        //                pc.producto();
-        //            } catch (InterruptedException ex) {
-        //                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-        //            }
-        //        });
-        
-            this.productor = new Thread( () -> {
+
+            //        this.producto = new Thread( () -> {
+            //            try {
+            //                pc.producto();
+            //            } catch (InterruptedException ex) {
+            //                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+            //            }
+            //        });
+            this.productor = new Thread(() -> {
                 try {
                     pc.productor();
                 } catch (InterruptedException ex) {
                     Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+            
+            verde2.setVisible(true);
+            rojo2.setVisible(false);
             
             //iniciar el hilo
             consumidor1.start();
@@ -469,19 +609,24 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             productor.start();
         }
         if (e.getSource() == btnStop) {
+            
+            verde1.setVisible(false);
+            verde2.setVisible(false);
+            rojo1.setVisible(true);
+            rojo2.setVisible(true);
+            
             //detener hilo de animacion y limpiar el panel
             consumidor1.interrupt();
             consumidor2.interrupt();
-            //producto.interrupt();
             productor.interrupt();
-            panelAlgoritmo.repaint();
+            //panelAlgoritmo.repaint();
             img1.setLocation(100, 100);
             img2.setLocation(100, 300);
             burguer1.setLocation(220, 200);
             burguer2.setLocation(290, 200);
             burguer3.setLocation(360, 200);
             burguer4.setLocation(430, 200);
-            burguer5.setLocation(700, 200);
+            burguer5.setLocation(500, 200);
             burguer1.setVisible(true);
             burguer2.setVisible(true);
             burguer3.setVisible(true);
