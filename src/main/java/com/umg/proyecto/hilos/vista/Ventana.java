@@ -23,6 +23,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
     private boolean avanzar2 = true;
 
     private int burguers = 5;
+    private int counter = 0;
 
     ProductorConsumidor pc = new ProductorConsumidor();
     Thread consumidor1;
@@ -48,7 +49,6 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
         private int burguerx = 220;
         private int burguery = 200;
-        private int counter = 0;
         private int countBurguerPosition = 280;
         private int img1x = 100;
         private int localImg1x;
@@ -298,13 +298,16 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     rojo2.setVisible(false);
                     wait();
                 }
+                
+                //imgProducer.setLocation(localImg3x, img3y);
+                imgProducer.setLocation(img3x, img3y);
+                
                 verde1.setVisible(true);
                 rojo1.setVisible(false);
                 verde2.setVisible(false);
                 rojo2.setVisible(true);
 
                 //panelAlgoritmo.repaint();
-                imgProducer.setLocation(localImg3x, img3y);
 
                 if (img3x == 700) {
                     avanzar = false;
@@ -317,60 +320,43 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     randomTime = random.nextInt(400) + 100;
 
-                    imgProducer.setLocation(localImg3x, img3y);
+                    //imgProducer.setLocation(localImg3x, img3y);
 
                     Thread.sleep(randomTime);
                     burguer5.setVisible(true);
 
                     burguer5.setLocation(burguerx + 280, burguery);
-                    imgProducer.setLocation(localImg3x, img3y);
 
-                    imgProducer.setLocation(localImg3x, img3y);
 
                     Thread.sleep(randomTime);
                     burguer4.setVisible(true);
 
-                    imgProducer.setLocation(localImg3x, img3y);
                     for (int i = 0; i <= 70; i++) {
-                        imgProducer.setLocation(localImg3x, img3y);
                         burguer4.setLocation(burguerx + 280 - (i), burguery);
                         Thread.sleep(10);
-                        imgProducer.setLocation(localImg3x, img3y);
                     }
 
-                    imgProducer.setLocation(localImg3x, img3y);
-
                     Thread.sleep(randomTime);
-                    imgProducer.setLocation(localImg3x, img3y);
 
                     burguer3.setVisible(true);
 
                     for (int i = 0; i <= 70; i++) {
-                        imgProducer.setLocation(localImg3x, img3y);
                         burguer3.setLocation(burguerx + 280 - (i * 2), burguery);
                         Thread.sleep(10);
                     }
 
-                    imgProducer.setLocation(localImg3x, img3y);
-
                     Thread.sleep(randomTime);
-                    imgProducer.setLocation(localImg3x, img3y);
                     burguer2.setVisible(true);
 
                     for (int i = 0; i <= 70; i++) {
-                        imgProducer.setLocation(localImg3x, img3y);
                         burguer2.setLocation(burguerx + 280 - (i * 3), burguery);
                         Thread.sleep(10);
                     }
 
-                    imgProducer.setLocation(localImg3x, img3y);
-
                     Thread.sleep(randomTime);
-                    imgProducer.setLocation(localImg3x, img3y);
                     burguer1.setVisible(true);
 
                     for (int i = 0; i <= 70; i++) {
-                        imgProducer.setLocation(localImg3x, img3y);
                         burguer1.setLocation(burguerx + 280 - (i * 4), burguery);
                         Thread.sleep(10);
                     }
@@ -418,6 +404,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
 
@@ -425,10 +413,9 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(null);
 
-        panelAlgoritmo.setBackground(new java.awt.Color(204, 255, 255));
-        panelAlgoritmo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        panelAlgoritmo.setBackground(new java.awt.Color(102, 204, 255));
         panelAlgoritmo.setLayout(null);
 
         img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user (1).png"))); // NOI18N
@@ -466,72 +453,33 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         burguer5.setBounds(500, 200, 32, 32);
 
         imgProducer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/chef (1).png"))); // NOI18N
+        imgProducer.setPreferredSize(null);
         panelAlgoritmo.add(imgProducer);
         imgProducer.setBounds(700, 200, 64, 64);
 
         verde1.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout verde1Layout = new javax.swing.GroupLayout(verde1);
-        verde1.setLayout(verde1Layout);
-        verde1Layout.setHorizontalGroup(
-            verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        verde1Layout.setVerticalGroup(
-            verde1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
+        verde1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        verde1.setLayout(null);
         panelAlgoritmo.add(verde1);
-        verde1.setBounds(640, 30, 40, 40);
+        verde1.setBounds(590, 130, 32, 32);
 
         rojo1.setBackground(new java.awt.Color(255, 0, 0));
-
-        javax.swing.GroupLayout rojo1Layout = new javax.swing.GroupLayout(rojo1);
-        rojo1.setLayout(rojo1Layout);
-        rojo1Layout.setHorizontalGroup(
-            rojo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        rojo1Layout.setVerticalGroup(
-            rojo1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
+        rojo1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        rojo1.setLayout(null);
         panelAlgoritmo.add(rojo1);
-        rojo1.setBounds(680, 30, 40, 40);
+        rojo1.setBounds(630, 130, 32, 32);
 
         rojo2.setBackground(new java.awt.Color(255, 0, 0));
-
-        javax.swing.GroupLayout rojo2Layout = new javax.swing.GroupLayout(rojo2);
-        rojo2.setLayout(rojo2Layout);
-        rojo2Layout.setHorizontalGroup(
-            rojo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        rojo2Layout.setVerticalGroup(
-            rojo2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
+        rojo2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        rojo2.setLayout(null);
         panelAlgoritmo.add(rojo2);
-        rojo2.setBounds(140, 30, 40, 40);
+        rojo2.setBounds(210, 130, 32, 32);
 
         verde2.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout verde2Layout = new javax.swing.GroupLayout(verde2);
-        verde2.setLayout(verde2Layout);
-        verde2Layout.setHorizontalGroup(
-            verde2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-        verde2Layout.setVerticalGroup(
-            verde2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 40, Short.MAX_VALUE)
-        );
-
+        verde2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        verde2.setLayout(null);
         panelAlgoritmo.add(verde2);
-        verde2.setBounds(180, 30, 40, 40);
+        verde2.setBounds(250, 130, 32, 32);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/plate.png"))); // NOI18N
         panelAlgoritmo.add(jLabel1);
@@ -557,25 +505,36 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         panelAlgoritmo.add(jLabel6);
         jLabel6.setBounds(200, 250, 350, 150);
 
-        jPanel1.add(panelAlgoritmo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 900, 400));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/puesto.png"))); // NOI18N
+        panelAlgoritmo.add(jLabel7);
+        jLabel7.setBounds(490, -80, 410, 500);
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/street (1).jpg"))); // NOI18N
+        panelAlgoritmo.add(jLabel8);
+        jLabel8.setBounds(0, 0, 900, 400);
+
+        jPanel1.add(panelAlgoritmo);
+        panelAlgoritmo.setBounds(50, 80, 900, 400);
 
         btnStart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnStart.setText("INICIAR");
-        jPanel1.add(btnStart, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 140, 40));
+        jPanel1.add(btnStart);
+        btnStart.setBounds(230, 20, 140, 40);
 
         btnStop.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnStop.setText("DETENER");
-        jPanel1.add(btnStop, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 130, 40));
+        jPanel1.add(btnStop);
+        btnStop.setBounds(610, 20, 130, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 994, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 994, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -632,6 +591,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelAlgoritmo;
     private javax.swing.JPanel rojo1;
@@ -685,30 +646,32 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         }
         if (e.getSource() == btnStop) {
 
-            verde1.setVisible(false);
-            verde2.setVisible(false);
-            rojo1.setVisible(true);
-            rojo2.setVisible(true);
+//            verde1.setVisible(false);
+//            verde2.setVisible(false);
+//            rojo1.setVisible(true);
+//            rojo2.setVisible(true);
 
             //detener hilo de animacion y limpiar el panel
             consumidor1.interrupt();
             consumidor2.interrupt();
             productor.interrupt();
             //panelAlgoritmo.repaint();
-            img1.setLocation(100, 100);
-            img2.setLocation(100, 300);
-            burguer1.setLocation(220, 200);
-            burguer2.setLocation(290, 200);
-            burguer3.setLocation(360, 200);
-            burguer4.setLocation(430, 200);
-            burguer5.setLocation(500, 200);
-            burguer1.setVisible(true);
-            burguer2.setVisible(true);
-            burguer3.setVisible(true);
-            burguer4.setVisible(true);
-            burguer5.setVisible(true);
-
-            burguers = 5;
+//            img1.setLocation(100, 100);
+//            img2.setLocation(100, 300);
+//            imgProducer.setLocation(700, 200);
+//            burguer1.setLocation(220, 200);
+//            burguer2.setLocation(290, 200);
+//            burguer3.setLocation(360, 200);
+//            burguer4.setLocation(430, 200);
+//            burguer5.setLocation(500, 200);
+//            burguer1.setVisible(true);
+//            burguer2.setVisible(true);
+//            burguer3.setVisible(true);
+//            burguer4.setVisible(true);
+//            burguer5.setVisible(true);
+//
+//            burguers = 5;
+//            counter = 0;
         }
     }
 }
