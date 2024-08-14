@@ -387,8 +387,6 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     localImg3x = img3x;
                 }
 
-                System.out.println(burguers);
-
                 notify();
                 Thread.sleep(10);
             }
@@ -419,6 +417,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         btnStart = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
 
@@ -432,13 +431,13 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         panelAlgoritmo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
         panelAlgoritmo.setLayout(null);
 
-        img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
+        img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user (1).png"))); // NOI18N
         panelAlgoritmo.add(img1);
-        img1.setBounds(100, 100, 32, 32);
+        img1.setBounds(100, 100, 64, 64);
 
-        img2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user.png"))); // NOI18N
+        img2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user (2).png"))); // NOI18N
         panelAlgoritmo.add(img2);
-        img2.setBounds(100, 300, 32, 32);
+        img2.setBounds(100, 300, 64, 64);
 
         burguer1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/burguer.png"))); // NOI18N
         burguer1.setMinimumSize(new java.awt.Dimension(0, 0));
@@ -554,6 +553,10 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         panelAlgoritmo.add(jLabel5);
         jLabel5.setBounds(415, 230, 70, 20);
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/table.png"))); // NOI18N
+        panelAlgoritmo.add(jLabel6);
+        jLabel6.setBounds(200, 250, 350, 150);
+
         jPanel1.add(panelAlgoritmo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 900, 400));
 
         btnStart.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -628,6 +631,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel panelAlgoritmo;
     private javax.swing.JPanel rojo1;
