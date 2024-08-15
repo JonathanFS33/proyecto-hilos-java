@@ -4,10 +4,7 @@ package com.umg.proyecto.hilos.vista;
  *
  * @author Jonathan
  */
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -16,7 +13,6 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sound.sampled.*;
-import javax.swing.ImageIcon;
 
 public class Ventana extends javax.swing.JFrame implements ActionListener {
 
@@ -56,19 +52,13 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             clip.start();
         }
 
-        private int bandera = 0;
-        private boolean first = true;
-
         private int burguerx = 220;
         private int burguery = 200;
-        private int countBurguerPosition = 280;
         private int img1x = 0;
         private int img1y = 200;
         private int localImg1x;
         private int localImg2x;
         private int localImg2y;
-        private int localImg3x;
-        private int localImg3y;
 
         Random random = new Random();
 
@@ -391,10 +381,8 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                 if (avanzar == false) {
                     img3x--;
-                    localImg3x = img3x;
                 } else {
                     img3x++;
-                    localImg3x = img3x;
                 }
 
                 notify();
