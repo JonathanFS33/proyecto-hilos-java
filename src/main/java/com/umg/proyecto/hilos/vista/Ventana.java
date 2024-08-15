@@ -10,9 +10,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.*;
 import javax.swing.ImageIcon;
 
 public class Ventana extends javax.swing.JFrame implements ActionListener {
@@ -44,13 +47,23 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
     class ProductorConsumidor {
 
+        public void audio() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+            File file = new File("src/main/resources/cash (1).wav");
+            AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioStream);
+
+            clip.start();
+        }
+
         private int bandera = 0;
         private boolean first = true;
 
         private int burguerx = 220;
         private int burguery = 200;
         private int countBurguerPosition = 280;
-        private int img1x = 100;
+        private int img1x = 0;
+        private int img1y = 200;
         private int localImg1x;
         private int localImg2x;
         private int localImg2y;
@@ -77,13 +90,11 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     wait();
                 }
 
-                //dibujar circulo
-                //panelAlgoritmo.repaint();
                 if (localImg1x != 200) {
-                    img1.setLocation(img1x, img1x);
+                    img1.setLocation(img1x, img1y);
                 }
 
-                if (img1x == 100) {
+                if (img1x == 0) {
                     avanzar = true;
 
                     randomIntInRange = random.nextInt(2);
@@ -99,13 +110,21 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     randomTime = random.nextInt(900) + 100;
 
+                    try {
+                        audio();
+                    } catch (UnsupportedAudioFileException ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (LineUnavailableException ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                     Thread.sleep(randomTime);
                     avanzar = false;
 
                     if (burguers == 5) {
                         burguer1.setVisible(false);
-                        burguer1.setPreferredSize(new Dimension(0, 0));
-                        panelAlgoritmo.revalidate();
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -115,7 +134,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                             burguer4.setLocation(430 - i, 200);
                             burguer5.setLocation(500 - i, 200);
 
-                            img1.setLocation(localImg1x, localImg1x);
+                            img1.setLocation(localImg1x, img1y);
                         }
 
                     } else if (burguers == 4) {
@@ -129,7 +148,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                             burguer4.setLocation(360 - i, 200);
                             burguer5.setLocation(430 - i, 200);
 
-                            img1.setLocation(localImg1x, localImg1x);
+                            img1.setLocation(localImg1x, img1y);
                         }
 
                     } else if (burguers == 3) {
@@ -142,7 +161,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                             burguer4.setLocation(290 - i, 200);
                             burguer5.setLocation(360 - i, 200);
 
-                            img1.setLocation(localImg1x, localImg1x);
+                            img1.setLocation(localImg1x, img1y);
                         }
 
                     } else if (burguers == 2) {
@@ -154,7 +173,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                             Thread.sleep(10);
                             burguer5.setLocation(290 - i, 200);
 
-                            img1.setLocation(localImg1x, localImg1x);
+                            img1.setLocation(localImg1x, img1y);
                         }
 
                     } else if (burguers == 1) {
@@ -166,10 +185,10 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                 }
 
                 if (avanzar) {
-                    img1x += 1;
+                    img1x += 2;
                     localImg1x = img1x;
                 } else {
-                    img1x -= 1;
+                    img1x -= 2;
                     localImg1x = img1x;
                 }
 
@@ -186,8 +205,6 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     wait();
                 }
 
-                //dibujar circulo
-                //panelAlgoritmo.repaint();
                 img2.setLocation(img2x, img2y);
 
                 if (img2x == 100) {
@@ -204,6 +221,17 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                 } else if (img2x == 200) {
                     randomTime = random.nextInt(900) + 100;
+
+                    try {
+                        audio();
+                    } catch (UnsupportedAudioFileException ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (LineUnavailableException ex) {
+                        Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                     Thread.sleep(randomTime);
                     avanzar2 = false;
 
@@ -224,7 +252,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     } else if (burguers == 4) {
                         burguer2.setVisible(false);
-  
+
                         burguers--;
 
                         for (int i = 0; i <= 70; i++) {
@@ -298,16 +326,14 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     rojo2.setVisible(false);
                     wait();
                 }
-                
+
                 //imgProducer.setLocation(localImg3x, img3y);
                 imgProducer.setLocation(img3x, img3y);
-                
+
                 verde1.setVisible(true);
                 rojo1.setVisible(false);
                 verde2.setVisible(false);
                 rojo2.setVisible(true);
-
-                //panelAlgoritmo.repaint();
 
                 if (img3x == 700) {
                     avanzar = false;
@@ -321,12 +347,10 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                     randomTime = random.nextInt(400) + 100;
 
                     //imgProducer.setLocation(localImg3x, img3y);
-
                     Thread.sleep(randomTime);
                     burguer5.setVisible(true);
 
                     burguer5.setLocation(burguerx + 280, burguery);
-
 
                     Thread.sleep(randomTime);
                     burguer4.setVisible(true);
@@ -420,7 +444,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
         img1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user (1).png"))); // NOI18N
         panelAlgoritmo.add(img1);
-        img1.setBounds(100, 100, 64, 64);
+        img1.setBounds(0, 200, 64, 64);
 
         img2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user (2).png"))); // NOI18N
         panelAlgoritmo.add(img2);
@@ -621,13 +645,6 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
                 }
             });
 
-            //        this.producto = new Thread( () -> {
-            //            try {
-            //                pc.producto();
-            //            } catch (InterruptedException ex) {
-            //                Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
-            //            }
-            //        });
             this.productor = new Thread(() -> {
                 try {
                     pc.productor();
@@ -645,33 +662,11 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
             productor.start();
         }
         if (e.getSource() == btnStop) {
-
-//            verde1.setVisible(false);
-//            verde2.setVisible(false);
-//            rojo1.setVisible(true);
-//            rojo2.setVisible(true);
-
             //detener hilo de animacion y limpiar el panel
             consumidor1.interrupt();
             consumidor2.interrupt();
             productor.interrupt();
-            //panelAlgoritmo.repaint();
-//            img1.setLocation(100, 100);
-//            img2.setLocation(100, 300);
-//            imgProducer.setLocation(700, 200);
-//            burguer1.setLocation(220, 200);
-//            burguer2.setLocation(290, 200);
-//            burguer3.setLocation(360, 200);
-//            burguer4.setLocation(430, 200);
-//            burguer5.setLocation(500, 200);
-//            burguer1.setVisible(true);
-//            burguer2.setVisible(true);
-//            burguer3.setVisible(true);
-//            burguer4.setVisible(true);
-//            burguer5.setVisible(true);
-//
-//            burguers = 5;
-//            counter = 0;
+
         }
     }
 }
