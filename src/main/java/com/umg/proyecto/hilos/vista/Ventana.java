@@ -76,7 +76,7 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
         public synchronized void run() throws InterruptedException {
             while (true) {
 
-                while (randomIntInRange == 1 || burguers == 0) {
+                while (randomIntInRange == 1 || burguers == 0) { 
                     wait();
                 }
 
@@ -336,7 +336,6 @@ public class Ventana extends javax.swing.JFrame implements ActionListener {
 
                     randomTime = random.nextInt(400) + 100;
 
-                    //imgProducer.setLocation(localImg3x, img3y);
                     Thread.sleep(randomTime);
                     burguer5.setVisible(true);
 
